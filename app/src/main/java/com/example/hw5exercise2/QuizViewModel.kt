@@ -1,12 +1,27 @@
 package com.example.hw5exercise2
+import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.app.appsearch.AppSearchResult.RESULT_OK
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.provider.FontsContractCompat.FontRequestCallback.RESULT_OK
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-
+import com.example.hw5exercise2.databinding.ActivityCheatBinding
+import com.example.hw5exercise2.databinding.ActivityMainBinding
 
 //Giving a name to my TAG and Current index Key for reference
-private const val TAG = "QuizViewModel"
-const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
-const val IS_CHEATER_KEY = "IS_CHEATER_KEY"
+//private const val TAG = "QuizViewModel"
+private const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
+private const val IS_CHEATER_KEY = "IS_CHEATER_KEY"
+
+
 
 
 
@@ -15,17 +30,6 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
 
 
 
-
-//    init {
-//        Log.d(TAG, "Quiz View Model Instance Created")
-//    }
-//
-//    override fun onCleared() {
-//        super.onCleared()
-//
-//        Log.d(TAG, "Quiz View Model is about to be Created")
-//
-//    }
 
     //Data from previous activity that is now saved as the current state and view
     private val questionBank = listOf(
@@ -36,6 +40,13 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
         question(R.string.question_americas, true),
         question(R.string.question_asia, true),
     )
+
+
+
+    //Saving the savedStateHandle for IS_CHEATER_KEY
+    var isCheater: Boolean
+        get() = savedStateHandle.get(IS_CHEATER_KEY) ?: false
+        set(value) = savedStateHandle.set(IS_CHEATER_KEY, value)
 
 
     //Defining currentIndex as an Integer
@@ -58,24 +69,20 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
 
 
 
-    //Saving the savedStateHandle for IS_CHEATER_KEY
-    var isCheater: Boolean
-        get() = savedStateHandle.get(IS_CHEATER_KEY) ?: false
-        set(value) = savedStateHandle.set(IS_CHEATER_KEY, value)
-
-
 
 
     //Newly defined function that allows the user to move forward a questions, and progress the question bank by 1
-//Also incrementing the current questionCount by 1
+//Incrementing the current questionCount by 1
     fun moveNext() {
         currentIndex = (currentIndex + 1) % questionBank.size
+
     }
 }
 
 
+
 //Newly defined function that allows the user to move back a questions, and progress the question bank by 1
-//Also incrementing the current questionCount by 1
+//Incrementing the current questionCount by -1
 //    fun movePrevious() {
 //        currentIndex = (currentIndex - 1 % questionBank.size)
 //    }

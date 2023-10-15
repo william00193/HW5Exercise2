@@ -1,10 +1,13 @@
 package com.example.hw5exercise2
 import android.app.Activity
+import android.app.appsearch.AppSearchResult.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.example.hw5exercise2.databinding.ActivityCheatBinding
+
 
 
 const val EXTRA_ANSWER_SHOWN =

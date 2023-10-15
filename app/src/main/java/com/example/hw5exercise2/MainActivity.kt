@@ -2,6 +2,7 @@ package com.example.hw5exercise2
 
 
 import android.app.Activity
+import android.content.ClipData.newIntent
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -20,20 +21,23 @@ import com.google.android.material.snackbar.Snackbar
 
 
 
-//Naming the Tag as 'MainActivty'
+
+
+
+
+
+//Naming the Tag as 'MainActivity'
 private const val TAG = "MainActivity"
 
 
 class MainActivity : AppCompatActivity() {
 
-    var questionCount = 1
+    private lateinit var binding: ActivityMainBinding
 
     //Giving a name to my ViewModel that will be referenced from another page later
     private val quizViewModel: QuizViewModel by viewModels()
-    private lateinit var binding: ActivityMainBinding
 
     private val cheatLauncher = registerForActivityResult(
-
         ActivityResultContracts.StartActivityForResult()
     )
     { result ->
@@ -45,9 +49,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
 
 //Binding and layout Inflator stayed the same as the last few activities
@@ -85,27 +89,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.questionTextView.setOnClickListener {
 
-
             quizViewModel.moveNext()
 
         }
 
 
 
-//Previous button that is not going to be used in this activity
-//        binding.previousButton.setOnClickListener {
-//
-//
-//            quizViewModel.movePrevious()
-//
-//        }
-
-
-
-
-
         binding.nextButton.setOnClickListener {
-
 
 
             binding.falseButton.isEnabled = true
@@ -115,21 +105,21 @@ class MainActivity : AppCompatActivity() {
 //Defined in QuizViewModel.kt file
             quizViewModel.moveNext()
 
-
             updateQuestion()
-
 
         }
 
-        //New button created for homework #5
+
+//New button created for homework #5
         binding.cheatButton.setOnClickListener {
 
-            // val intent = Intent(this,CheatActivity::class.java)
+//val intent = Intent(this,CheatActivity::class.java)
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            //    startActivity(intent)
-            cheatLauncher.launch(intent)
 
+
+//startActivity(intent)
+            cheatLauncher.launch(intent)
 
         }
 
@@ -162,7 +152,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
         val messageResId =
             when {
                 quizViewModel.isCheater -> R.string.judgement_toast
@@ -178,7 +167,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //Logs for the first exercise
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart() called")
