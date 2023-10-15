@@ -25,8 +25,8 @@ class CheatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-//Binding and layout Inflator stayed the same as the last few activities
-//Replaces set content view
+ //Binding and layout Inflator stayed the same as the last few activities
+ //Replaces set content view
         binding = ActivityCheatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
