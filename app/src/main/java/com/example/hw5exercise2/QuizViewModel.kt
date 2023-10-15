@@ -40,7 +40,7 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
 
     //Defining currentIndex as an Integer
 //Getting the saved state, and getting the current index key previously defined
-    var currentIndex: Int
+    private var currentIndex
         get() = savedStateHandle.get(CURRENT_INDEX_KEY) ?: 0
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
@@ -69,7 +69,7 @@ class QuizViewModel(private val savedStateHandle: SavedStateHandle): ViewModel()
     //Newly defined function that allows the user to move forward a questions, and progress the question bank by 1
 //Also incrementing the current questionCount by 1
     fun moveNext() {
-        currentIndex = (currentIndex + 1 % questionBank.size)
+        currentIndex = (currentIndex + 1) % questionBank.size
     }
 }
 

@@ -101,17 +101,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-//New button created for homework #5
-        binding.cheatButton.setOnClickListener {
 
-            // val intent = Intent(this,CheatActivity::class.java)
-            val answerIsTrue = quizViewModel.currentQuestionAnswer
-            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            //    startActivity(intent)
-            cheatLauncher.launch(intent)
-
-
-        }
 
 
         binding.nextButton.setOnClickListener {
@@ -127,6 +117,18 @@ class MainActivity : AppCompatActivity() {
 
 
             updateQuestion()
+
+
+        }
+
+        //New button created for homework #5
+        binding.cheatButton.setOnClickListener {
+
+            // val intent = Intent(this,CheatActivity::class.java)
+            val answerIsTrue = quizViewModel.currentQuestionAnswer
+            val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
+            //    startActivity(intent)
+            cheatLauncher.launch(intent)
 
 
         }
